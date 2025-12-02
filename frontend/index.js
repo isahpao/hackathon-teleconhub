@@ -1,9 +1,9 @@
-
-const API_URL_BASE = "http://localhost:4000";
-const ENDPOINT_DASHBOARD = `${API_URL_BASE}/dashboard`; //Tela principal
-const ENDPOINT_TRANSACOES = `${API_URL_BASE}/transacoes`; //Transações 
-
-
+// ===============================
+// CONFIGURAÇÃO DA API ONLINE
+// ===============================
+const API_URL_BASE = "https://hackathon-teleconhub.onrender.com";
+const ENDPOINT_DASHBOARD = `${API_URL_BASE}/dashboard`;
+const ENDPOINT_TRANSACOES = `${API_URL_BASE}/transacoes`;
 
 function traduzirCategoria(categoriaCurta) {
   if (!categoriaCurta) return "Outros";
@@ -34,7 +34,6 @@ function traduzirCategoria(categoriaCurta) {
     case "serviços":
       return "Serviços";
     default:
-      // Capitaliza (ex: 'outros' vira 'Outros')
       return categoriaCurta.charAt(0).toUpperCase() + categoriaCurta.slice(1);
   }
 }
@@ -57,7 +56,7 @@ function categorizar(descricao) {
   if (descricao.includes("farmácia") || descricao.includes("remédio"))
     return "Saúde";
   if (descricao.includes("salário") || descricao.includes("pagamento"))
-    return "Renda"; // Se for o salário
+    return "Renda";
   if (
     descricao.includes("recarga") ||
     descricao.includes("celular") ||
@@ -67,14 +66,8 @@ function categorizar(descricao) {
   return "Outros";
 }
 
-// ---------------------------
-// COMUNICAÇÃO COM A API E ATUALIZAÇÃO DO DASHBOARD
-// ---------------------------
-
-// Carregar os dados e atualizar a tela
 async function carregarDashboard() {
   try {
-   
     const [dashboardResponse, transacoesResponse] = await Promise.all([
       fetch(ENDPOINT_DASHBOARD),
       fetch(ENDPOINT_TRANSACOES),
@@ -84,15 +77,14 @@ async function carregarDashboard() {
       throw new Error("Erro ao buscar dados do backend.");
     }
 
-    const dashboard = await dashboardResponse.json(); // Saldo, Previsão, Padrão
-    const transacoes = await transacoesResponse.json(); // Lista de transações
+    const dashboard = await dashboardResponse.json();
+    const transacoes = await transacoesResponse.json();
 
     const lista = document.getElementById("lista-transacoes");
     const saldoElemento = document.getElementById("saldo");
     const previsaoElemento = document.getElementById("previsao");
     const padraoElemento = document.getElementById("padrao");
 
-   
     saldoElemento.textContent = `R$ ${dashboard.saldo}`;
     previsaoElemento.textContent = dashboard.previsao_quebra;
 
@@ -115,13 +107,11 @@ async function carregarDashboard() {
       saldoElemento.classList.add("saldo-positivo");
     }
 
-    lista.innerHTML = ""; // limpa lista
+    lista.innerHTML = "";
     transacoes.forEach((t) => {
       const li = document.createElement("li");
       const valorFormatado = t.valor.toFixed(2);
-     
       const categoriaLegivel = traduzirCategoria(t.categoria);
-
       li.textContent = `${t.descricao} (${categoriaLegivel}): R$ ${valorFormatado}`;
       lista.appendChild(li);
     });
@@ -131,11 +121,6 @@ async function carregarDashboard() {
   }
 }
 
-// ---------------------------------------
-// FUNÇÕES DAS AÇÕES RÁPIDAS
-// ---------------------------------------
-
-//nova transação
 async function enviarNovaTransacao(novaTransacao) {
   try {
     const response = await fetch(ENDPOINT_TRANSACOES, {
@@ -147,7 +132,6 @@ async function enviarNovaTransacao(novaTransacao) {
     if (!response.ok)
       throw new Error(`Erro ao adicionar transação: ${response.status}`);
 
-    //recarrega a tela para mostrar o novo estado
     carregarDashboard();
     return true;
   } catch (error) {
@@ -157,7 +141,6 @@ async function enviarNovaTransacao(novaTransacao) {
   }
 }
 
-// adiciona dinheiro rápido (Ação de POST)
 function entradaRapida(valor) {
   const nova = {
     descricao: `Entrada rápida +${valor}`,
@@ -167,7 +150,6 @@ function entradaRapida(valor) {
   enviarNovaTransacao(nova);
 }
 
-// Gastos rápidos (Ação de POST)
 function gastoRapido(descricao, valor) {
   const nova = {
     descricao,
@@ -177,22 +159,20 @@ function gastoRapido(descricao, valor) {
   enviarNovaTransacao(nova);
 }
 
-//pagamento de boleto (Ação de POST)
 async function pagarBoleto() {
   const nova = {
     descricao: "Pagamento de boleto",
-    valor: -100, // Exemplo
+    valor: -100,
     categoria: "Serviços",
   };
   const sucesso = await enviarNovaTransacao(nova);
   if (sucesso) alert("Boleto pago com sucesso!");
 }
 
-//recarga de celular (Ação de POST)
 async function recargaCelular() {
   const nova = {
     descricao: "Recarga de celular",
-    valor: -20, // Ex
+    valor: -20,
     categoria: "Serviços",
   };
   const sucesso = await enviarNovaTransacao(nova);
@@ -205,14 +185,9 @@ async function resetarTudo() {
       await fetch(ENDPOINT_TRANSACOES + "/reset", { method: "POST" });
       carregarDashboard();
     } catch (e) {
-      alert(
-        "Falha ao resetar. Implemente a rota de reset no backend primeiro."
-      );
+      alert("Falha ao resetar. Implemente a rota de reset no backend primeiro.");
     }
   }
 }
 
-// ---------------------------------------
-// INICIALIZAÇÃO
-// ---------------------------------------
 carregarDashboard();
