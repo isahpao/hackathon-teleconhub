@@ -1,7 +1,6 @@
 1. Clonar o repositório
-git clone https://github.com/matanganelli/hackathon-teleconhub
 
-cd hackathon-teleconhub
+git clone https://github.com/isahpao/hackathon-teleconhub
 
 2. Entrar na pasta do backend
    
