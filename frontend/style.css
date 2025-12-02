@@ -52,7 +52,7 @@ body {
   transform: translateY(-50%);
   width: 180px;
   height: 180px;
-  background-image: url("/frontend/images/moedas.jpg");
+  background-image: url("./images/moedas.jpg");
   background-size: cover;
   background-position: center;
   opacity: 0.35;
