@@ -1,0 +1,29 @@
+[
+  {
+    "id_pix": 1,
+    "id_conta": 1,
+    "chave_destino": "111.222.333-44",
+    "tipo_chave": "cpf",
+    "tipo_operacao": "envio",
+    "valor": 50.00,
+    "data_pix": "2025-11-01"
+  },
+  {
+    "id_pix": 2,
+    "id_conta": 3,
+    "chave_destino": "contato@teste.com",
+    "tipo_chave": "email",
+    "tipo_operacao": "envio",
+    "valor": 20.00,
+    "data_pix": "2025-11-02"
+  },
+  {
+    "id_pix": 3,
+    "id_conta": 4,
+    "chave_destino": "+5511999999999",
+    "tipo_chave": "telefone",
+    "tipo_operacao": "recebimento",
+    "valor": 150.00,
+    "data_pix": "2025-11-03"
+  }
+]

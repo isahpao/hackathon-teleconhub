@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Telecom Financial - Nova Transação</title>
+    <link rel="stylesheet" href="/frontend/style.css" />
+    <link
+      rel="shortcut icon"
+      href="/frontend/images/piggy-bank.png"
+      type="image/x-icon"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Adicionar Movimentação</h1>
+
+      <!-- Tipo da transação -->
+      <label>Tipo:</label>
+      <select id="tipo">
+        <option value="">Selecione...</option>
+        <option value="entrada">Entrada (Recebimento)</option>
+        <option value="gasto">Gasto (Pagamento)</option>
+      </select>
+
+      <!-- Categoria -->
+      <label>Categoria:</label>
+      <select id="categoria">
+        <option value="">Selecione...</option>
+        <option value="Alimentação">Alimentação</option>
+        <option value="Transporte">Transporte</option>
+        <option value="Saúde">Saúde</option>
+        <option value="Serviços">Serviços</option>
+        <option value="Renda">Renda</option>
+        <option value="Outros">Outros</option>
+      </select>
+
+      <!-- Descrição -->
+      <label>Descrição:</label>
+      <input type="text" id="descricao" placeholder="Ex: Compra no mercado" />
+
+      <!-- Valor -->
+      <label>Valor:</label>
+      <input type="number" id="valor" placeholder="Ex: 50" />
+
+      <button class="btn" onclick="adicionarTransacao()">Salvar</button>
+
+      <a href="index.html" class="btn">Voltar</a>
+    </div>
+
+    <script>
+      // A URL que seu backend usa para adicionar novas transações
+      const ENDPOINT_TRANSACOES = "http://localhost:4000/transacoes";
+
+      async function adicionarTransacao() {
+        const tipo = document.getElementById("tipo").value;
+        const categoria = document.getElementById("categoria").value;
+        const descricao = document.getElementById("descricao").value.trim();
+        const valorDigitado = Number(document.getElementById("valor").value);
+
+        if (!tipo || !categoria || !descricao || !valorDigitado) {
+          alert("Preencha todos os campos!");
+          return;
+        }
+
+        // Se for gasto, valor fica negativo automaticamente
+        const valorFinal =
+          tipo === "gasto" ? -Math.abs(valorDigitado) : Math.abs(valorDigitado);
+
+        const novaTransacao = {
+          descricao: descricao,
+          valor: valorFinal,
+          categoria: categoria,
+        };
+
+        try {
+          // *** AQUI É ONDE ENVIAMOS OS DADOS PARA O BACKEND VIA API ***
+          const response = await fetch(ENDPOINT_TRANSACOES, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(novaTransacao),
+          });
+
+          if (!response.ok) {
+            // Se a resposta não for 2xx (ex: 404, 500)
+            throw new Error(`Erro no servidor: ${response.status}`);
+          }
+
+          alert("Movimentação adicionada com sucesso!");
+          window.location.href = "index.html";
+        } catch (error) {
+          console.error("Erro ao salvar transação na API:", error);
+          alert(
+            "Erro ao conectar com o servidor. Verifique se o backend está rodando em http://localhost:4000."
+          );
+        }
+      }
+    </script>
+  </body>
+</html>

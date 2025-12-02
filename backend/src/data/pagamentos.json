@@ -1,0 +1,26 @@
+[
+  {
+    "id_pagamento": 1,
+    "id_conta": 1,
+    "codigo_barras": "123456789000111222333444555666777888999000",
+    "valor": 80.00,
+    "status_pagamento": "pendente",
+    "data_pagamento": "2025-11-01"
+  },
+  {
+    "id_pagamento": 2,
+    "id_conta": 2,
+    "codigo_barras": "998877665544332211009988776655443322110099",
+    "valor": 120.50,
+    "status_pagamento": "pago",
+    "data_pagamento": "2025-11-02"
+  },
+  {
+    "id_pagamento": 3,
+    "id_conta": 3,
+    "codigo_barras": "111111222222333333444444555555666666777777",
+    "valor": 45.00,
+    "status_pagamento": "pago",
+    "data_pagamento": "2025-11-03"
+  }
+]

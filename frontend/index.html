@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Telecom Financial - Extrato</title>
+    <link rel="stylesheet" href="/frontend/style.css" />
+    <link
+      rel="shortcut icon"
+      href="/frontend/images/piggy-bank.png"
+      type="image/x-icon"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h1>
+        <img src="/frontend/images/piggy-bank.png" alt="Telecom Financial" class="logo" />
+        Telecom Financial
+      </h1>
+
+      <!-- SALDO -->
+      <div class="saldo-box">
+        <h2>O seu saldo atual:</h2>
+        <p id="saldo">R$ 0,00</p>
+      </div>
+
+      <!-- MOVIMENTAÇÕES -->
+      <h3>Movimentações</h3>
+      <ul id="lista-transacoes"></ul>
+
+      <hr />
+
+      <!-- OPERAÇÕES -->
+      <h2>Ações Rápidas</h2>
+
+      <div class="botoes-box">
+        <!-- ENTRADAS -->
+        <button class="btn" onclick="entradaRapida(100)">Receber R$100</button>
+        <button class="btn" onclick="entradaRapida(500)">Receber R$500</button>
+
+        <!-- GASTOS COMUNS -->
+        <button class="btn vermelho" onclick="gastoRapido('Uber', 20)">
+          Uber - R$20
+        </button>
+        <button class="btn vermelho" onclick="gastoRapido('Mercado', 150)">
+          Mercado - R$150
+        </button>
+        <button class="btn vermelho" onclick="gastoRapido('Farmácia', 35)">
+          Farmácia - R$35
+        </button>
+        <button class="btn vermelho" onclick="gastoRapido('Lanche', 30)">
+          Lanche - R$30
+        </button>
+
+        <!-- SERVIÇOS -->
+        <button class="btn vermelho" onclick="pagarBoleto()">
+          Pagar Boleto
+        </button>
+        <button class="btn vermelho" onclick="recargaCelular()">
+          Recarga Celular
+        </button>
+
+        <!-- PÁGINA PARA ADICIONAR QUALQUER COISA -->
+        <a class="btn" href="/frontend/nova-transacao.html"
+          >Adicionar Movimentação Manual</a
+        >
+      </div>
+
+      <hr />
+
+      <!-- IA -->
+      <div class="ia-box">
+        <h2>Análises Inteligentes</h2>
+
+        <h3>Previsão de quando o saldo acaba:</h3>
+        <p id="previsao">—</p>
+
+        <h3>Padrão de gastos detectado:</h3>
+        <p id="padrao">—</p>
+      </div>
+      <hr />
+      <!-- <button class="btn" onclick="resetarTudo()">Resetar histórico</button> -->
+    </div>
+
+    <script src="/frontend/index.js"></script>
+  </body>
+</html>

@@ -1,0 +1,65 @@
+[
+  {
+    "id": 1,
+    "descricao": "Recarga de celular",
+    "categoria": "recarga",
+    "valor": -15.00,
+    "data": "2025-11-01"
+  },
+  {
+    "id": 2,
+    "descricao": "PIX enviado",
+    "categoria": "pix_envio",
+    "valor": -50.00,
+    "data": "2025-11-01"
+  },
+  {
+    "id": 3,
+    "descricao": "Pagamento de boleto",
+    "categoria": "pagamento",
+    "valor": -80.00,
+    "data": "2025-11-01"
+  },
+  {
+    "id": 4,
+    "descricao": "PIX enviado",
+    "categoria": "pix_envio",
+    "valor": -20.00,
+    "data": "2025-11-02"
+  },
+  {
+    "id": 5,
+    "descricao": "Recarga de celular",
+    "categoria": "recarga",
+    "valor": -20.00,
+    "data": "2025-11-02"
+  },
+  {
+    "id": 6,
+    "descricao": "Pagamento de boleto",
+    "categoria": "pagamento",
+    "valor": -120.50,
+    "data": "2025-11-02"
+  },
+  {
+    "id": 7,
+    "descricao": "Recarga de celular",
+    "categoria": "recarga",
+    "valor": -30.00,
+    "data": "2025-11-03"
+  },
+  {
+    "id": 8,
+    "descricao": "PIX recebido",
+    "categoria": "pix_recebido",
+    "valor": 150.00,
+    "data": "2025-11-03"
+  },
+  {
+    "id": 9,
+    "descricao": "Pagamento de boleto",
+    "categoria": "pagamento",
+    "valor": -45.00,
+    "data": "2025-11-03"
+  }
+]

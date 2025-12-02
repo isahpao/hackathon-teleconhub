@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "id_conta": 1,
+    "numero": "11988887777",
+    "operadora": "Vivo",
+    "valor": 15.00,
+    "data_recarga": "2025-11-01"
+  },
+  {
+    "id": 2,
+    "id_conta": 2,
+    "numero": "11999998888",
+    "operadora": "Claro",
+    "valor": 20.00,
+    "data_recarga": "2025-11-02"
+  },
+  {
+    "id": 3,
+    "id_conta": 3,
+    "numero": "21988886666",
+    "operadora": "Tim",
+    "valor": 30.00,
+    "data_recarga": "2025-11-03"
+  }
+]
